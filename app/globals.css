@@ -1,0 +1,606 @@
+/* Remove the Google Fonts import that was causing the error */
+@import "./noise.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Restore the purple primary color */
+    --primary: 267 75% 40%; /* Purple color */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Restore the purple primary color for dark mode */
+    --primary: 267 75% 60%; /* Lighter purple for dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: "Funnel Display", system-ui, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Add the Funnel Display font classes */
+.funnel-display-base {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.funnel-display-light {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.funnel-display-medium {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.funnel-display-semibold {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.funnel-display-bold {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.funnel-display-extrabold {
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fix for SVG in custom nodes */
+.svg-container svg {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: visible;
+}
+
+/* Node selection animation */
+@keyframes dashOffset {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 20;
+  }
+}
+
+/* Node highlight animation */
+.node-highlight {
+  animation: dashOffset 1s linear infinite;
+  pointer-events: none;
+}
+
+/* Connection line animation */
+.react-flow__connection-path {
+  animation: connectionPulse 1.5s infinite;
+}
+
+@keyframes connectionPulse {
+  0% {
+    stroke-opacity: 0.6;
+    stroke-width: 2;
+  }
+  50% {
+    stroke-opacity: 1;
+    stroke-width: 3;
+  }
+  100% {
+    stroke-opacity: 0.6;
+    stroke-width: 2;
+  }
+}
+
+/* Node center target indicator */
+.node-center-target {
+  animation: pulse 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+/* Make nodes more interactive for connections */
+.react-flow__node {
+  transition: filter 0.2s ease;
+  cursor: pointer;
+}
+
+.react-flow__node.connectable {
+  cursor: crosshair;
+}
+
+.react-flow__node:hover {
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
+}
+
+/* Enhance the connection line */
+.react-flow__connection-path {
+  stroke-width: 2;
+  stroke: #3b82f6;
+  animation: connectionPulse 1.5s infinite;
+}
+
+/* Standard selection outline animation */
+.node-selected {
+  z-index: 10;
+}
+
+/* Ensure React Flow nodes resize properly */
+.react-flow__node {
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Ensure node content fills the node */
+.react-flow__node-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Error message animation */
+@keyframes errorAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  50% {
+    transform: translateY(5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.error-message-animation {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes errorPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+    background-color: rgba(254, 242, 242, 1);
+  }
+  50% {
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.25);
+    background-color: rgba(254, 226, 226, 1);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+    background-color: rgba(254, 242, 242, 1);
+  }
+}
+
+/* Add this CSS class for the fade-out animation */
+
+/* Error message fade-out animation */
+@keyframes errorFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.error-message-exit {
+  animation: fadeOut 0.3s ease-in-out;
+}
+
+/* Update connection line color to match the new purple theme */
+.react-flow__connection-path {
+  stroke: hsl(var(--primary));
+}
+
+/* Add these styles at the end of the file to enhance handle interaction */
+
+/* Find the CSS rules for React Flow handles and update them */
+
+/* Base handle styling */
+.react-flow__handle {
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  width: 18px !important; /* Increased from 16px to 18px */
+  height: 18px !important; /* Increased from 16px to 18px */
+  border: 2px solid white !important;
+  border-radius: 50% !important;
+  z-index: 10;
+}
+
+/* Different colors for source and target handles */
+.react-flow__handle-bottom {
+  background-color: #3b82f6 !important; /* Keep source handles blue */
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6) !important;
+}
+
+.react-flow__handle-top {
+  top: -9px !important;
+  /* Remove the green background here as we'll apply it conditionally */
+  background-color: transparent !important;
+}
+
+/* Show source handles on hover */
+.react-flow__node:hover .react-flow__handle-bottom {
+  opacity: 1;
+}
+
+/* When dragging a connection, only show target handles on target nodes */
+.react-flow.dragging .react-flow__node:not(.source-node) .react-flow__handle-top {
+  opacity: 1;
+  animation: handlePulseGreen 1s infinite; /* Changed animation for green */
+}
+
+/* Add a new animation for green handles */
+@keyframes handlePulseGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    transform: scale(1);
+  }
+  40% {
+    box-shadow: 0 0 10px 3px rgba(34, 197, 94, 0.5);
+    transform: scale(1.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    transform: scale(1);
+  }
+}
+
+/* Hide all other handles when dragging */
+.react-flow.dragging .react-flow__handle-bottom {
+  opacity: 0 !important;
+}
+
+/* Keep source handle visible on source node when dragging */
+.react-flow.dragging .source-node .react-flow__handle-bottom {
+  opacity: 1 !important;
+}
+
+/* Increase size and add glow effect on hover */
+.react-flow__handle:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.9) !important;
+}
+
+/* Improve visibility of connection in progress */
+.react-flow__handle.connecting {
+  opacity: 1;
+  background-color: #3b82f6 !important;
+  animation: handlePulse 1s infinite !important; /* Changed from 1.5s to 1s */
+}
+
+/* Ensure handles are properly positioned for the new size */
+.react-flow__handle-top {
+  top: -9px !important; /* Adjusted for larger handle size */
+}
+
+.react-flow__handle-bottom {
+  bottom: -9px !important; /* Adjusted for larger handle size */
+}
+
+/* Force animation on target handles when dragging */
+.react-flow.dragging .react-flow__handle-top {
+  animation: handlePulseGreen 1s infinite !important; /* Changed from 1.5s to 1s */
+}
+
+/* Ensure buttons use the primary color */
+.btn-primary,
+button[class*="bg-primary"],
+.bg-primary {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+/* Ensure hover states for buttons */
+.btn-primary:hover,
+button[class*="bg-primary"]:hover,
+.bg-primary:hover {
+  background-color: hsl(var(--primary) / 0.9) !important;
+}
+
+/* Add these styles at the end of the file to customize the checkbox appearance */
+
+/* Custom checkbox styling for the connection form */
+.custom-connection-checkbox:checked {
+  background-color: black !important;
+  color: #cca8f0 !important;
+}
+
+/* Custom radio button styling for the connection form */
+.custom-connection-radio {
+  border-color: #cca8f0 !important;
+}
+
+.custom-connection-radio:checked {
+  background-color: #cca8f0 !important;
+  color: white !important;
+}
+
+/* Add these new classes for valid and invalid handles after the existing handle styles */
+
+/* Valid and invalid handle styles */
+.react-flow__handle-valid {
+  background-color: #22c55e !important; /* Green for valid connections */
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6) !important;
+}
+
+.react-flow__handle-invalid {
+  background-color: #ef4444 !important; /* Red for invalid connections */
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6) !important;
+}
+
+/* Animation for valid handles */
+@keyframes handlePulseValid {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    transform: scale(1);
+  }
+  40% {
+    box-shadow: 0 0 10px 3px rgba(34, 197, 94, 0.5);
+    transform: scale(1.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    transform: scale(1);
+  }
+}
+
+/* Animation for invalid handles */
+@keyframes handlePulseInvalid {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    transform: scale(1);
+  }
+  40% {
+    box-shadow: 0 0 10px 3px rgba(239, 68, 68, 0.5);
+    transform: scale(1.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to valid and invalid handles */
+.react-flow.dragging .react-flow__node:not(.source-node) .react-flow__handle-valid {
+  opacity: 1;
+  animation: handlePulseValid 1s infinite;
+}
+
+.react-flow.dragging .react-flow__node:not(.source-node) .react-flow__handle-invalid {
+  opacity: 1;
+  animation: handlePulseInvalid 1s infinite;
+}
+
+/* Add these styles at the end of the file to highlight selected edges */
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+}
+
+/* Increase the clickable area of edges without changing their visual appearance */
+.react-flow__edge {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+/* This creates an invisible, wider path that's clickable */
+.react-flow__edge-interaction {
+  stroke: transparent;
+  stroke-width: 15px; /* Much wider than the visible path for easier clicking */
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* Highlight edges on hover */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.4));
+}
+
+/* Edge deletion mode styles */
+.edge-deletion-mode .react-flow__edge {
+  cursor: pointer;
+}
+
+.edge-deletion-mode .react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 4;
+  stroke: #ef4444 !important;
+  filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5));
+}
+
+/* Edge deletion button styles */
+.edge-deletion-button {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.edge-deletion-button:hover {
+  background-color: #fee2e2;
+  transform: scale(1.1);
+}
+
+/* Tooltip styles */
+.edge-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+}
