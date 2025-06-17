@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useModelContext } from "@/contexts/model-context"
 import { kaosModel } from "@/models/kaos-model"
+import { bpmnModel } from "@/models/bpmn-model"
 import { customModel } from "@/models/custom-model" // Import the custom model
 import { InfoIcon, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -20,7 +21,7 @@ export default function ModelSelectionPage() {
     router.push("/editor")
   }
 
-  // Update the availableModels array to only include KAOS and custom model
+  // Update the availableModels array to include BPMN model
   const availableModels = [
     {
       ...kaosModel,
@@ -30,6 +31,15 @@ export default function ModelSelectionPage() {
       borderColor: "border-purple-200",
       documentationUrl: documentationLink,
       description: kaosModel.description.endsWith(".") ? kaosModel.description : `${kaosModel.description}.`,
+    },
+    {
+      ...bpmnModel,
+      color: "bg-[#dbeafe]",
+      textColor: "text-[#1e3a8a]",
+      buttonColor: "bg-[#1e3a8a] text-white",
+      borderColor: "border-blue-200",
+      documentationUrl: "https://www.omg.org/spec/BPMN/2.0/",
+      description: bpmnModel.description.endsWith(".") ? bpmnModel.description : `${bpmnModel.description}.`,
     },
     {
       ...customModel,
@@ -73,7 +83,7 @@ export default function ModelSelectionPage() {
           </div>
 
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
               {/* Available models */}
               {availableModels.map((model) => (
                 <div
@@ -133,10 +143,21 @@ export default function ModelSelectionPage() {
                     <button
                       onClick={() => handleSelectModel(model)}
                       className={`w-full py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 ${
-                        model.id === "custom" ? "bg-gray-900 text-[#f9fafb]" : "bg-[#141b2a] text-[#e5d4f7]"
+                        model.id === "custom" 
+                          ? "bg-gray-900 text-[#f9fafb]" 
+                          : model.id === "bpmn"
+                          ? "bg-[#1e3a8a] text-white"
+                          : "bg-[#141b2a] text-[#e5d4f7]"
                       } font-medium transition-transform hover:scale-[1.02] flex-none`}
                     >
-                      <span>{model.id === "custom" ? "Start from Scratch" : "Start with KAOS"}</span>
+                      <span>
+                        {model.id === "custom" 
+                          ? "Start from Scratch" 
+                          : model.id === "bpmn"
+                          ? "Start with BPMN"
+                          : "Start with KAOS"
+                        }
+                      </span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
